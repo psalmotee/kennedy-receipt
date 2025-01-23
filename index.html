@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receipt Generator - Kennedy Soft Tech Link</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <div class="form-group">
+      <div class="form-items">
+        <label for="sellerName">Seller Name:</label>
+        <input type="text" id="sellerName" placeholder="John Doe" />
+      </div>
+      <div class="form-items">
+        <label for="billingTo">Billing to:</label>
+        <input
+          type="text"
+          id="billingTo"
+          placeholder="John Dee"
+        />
+      </div>
+      <div class="form-items date-center">
+        <label for="date">Date:</label>
+        <input type="date" id="date" />
+      </div>
+</div>
+      <h3>Items</h3>
+      <div id="items-container">
+        <!-- Items will be append here -->
+      </div>
+
+      <button class="btn receipt-btn" onclick="addItem()">Add Item</button>
+      <button class="btn receipt-btn" onclick="generateReceipt()">Update Receipt</button>
+      <button class="btn receipt-btn" onclick="downloadPDF()">Download PDF</button>
+    </div>
+
+    <div class="receipt-container" id="receipt">
+      <header class="header">
+        <img
+          src="./assets/images/kennedy SoftTech Link Logo.png"
+          alt="Kennedy Soft Tech Link Logo"
+          id="logoImg"
+        />
+        <h3 class="company-name">KENNEDY SOFT-TECH LINK</h3>
+      </header>
+
+      <section class="billing-info">
+        <div class="seller">
+          <h5>Seller Name</h5>
+          <p id="receiptSellerName"></p>
+        </div>
+        <div class="billing-to">
+          <h5>Billing to:</h5>
+          <p id="receiptBillingTo"></p>
+        </div>
+      </section>
+
+      <h5 class="receipt-title">RECEIPT</h5>
+      <div class="receipt-date">
+        <p>Date: <span id="receiptDate"></span></p>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>S/N</th>
+            <th>ITEM</th>
+            <th>PRICE</th>
+          </tr>
+        </thead>
+        <tbody id="receiptItems">
+          <!-- Items will be updated here -->
+        </tbody>
+      </table>
+
+      <p class="total" id="receiptTotal">TOTAL: 0:00</p>
+
+      <div class="contact">
+        <p class="contact-title">CONTACT</p>
+        <p>Phone: 07018948885</p>
+        <p>
+          Email:
+          <a href="mailto:ezekuliejohnero6@gmail.com"
+            >ezekuliejohnero6@gmail.com</a
+          >
+        </p>
+      </div>
+
+      <p class="thank-you">Thank for choosing Soft-Tech-Link</p>
+    </div>
+
+    <script src="./assets/scripts/script.js"></script>
+  </body>
+</html>
