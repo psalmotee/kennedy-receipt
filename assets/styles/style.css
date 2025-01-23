@@ -198,6 +198,16 @@ th {
     grid-template-columns: 50px 1fr 150px auto;
   }
 
+  .items-group input[type="number"]::-webkit-outer-spin-button,
+  .items-group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .items-group input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
   .header img {
     width: 80px;
   }
