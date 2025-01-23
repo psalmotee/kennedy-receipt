@@ -1,4 +1,4 @@
-/* google Font */
+/* Base styles */
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap");
 
 * {
@@ -7,49 +7,61 @@
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   font-family: "Courier Prime", monospace;
   line-height: 1.6;
-  padding: 20px;
-  max-width: 100%;
-  margin: 0 auto;
+  padding: 1.25rem;
   background-color: #f4f4f4;
 }
 
-.form-container,
-.receipt-container {
+/* Form and items styles  */
+.form-container {
   background-color: #fff;
-  padding: 20px;
-  border-radius: 1rem;
+  padding: 1.25rem;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-block-end: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 1.25rem;
 }
 
-.form-group, .items-group {
+.form-group,
+.items-group {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 1rem;
   margin-bottom: 1rem;
 }
 
-.form-group label {
+.form-items label {
   display: block;
-  margin-block-end: .5rem;
+  margin-bottom: 0.5rem;
   font-weight: bold;
 }
 
-.form-group input, .items-group input {
+.form-items input,
+.items-group input {
   width: 100%;
-  padding: .5rem;
+  padding: 0.5rem;
   border: 1px solid #0000ff;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
-
-.form-group input:focus, .items-group input:focus {
+.form-group input:focus,
+.items-group input:focus {
   outline: none;
   border-color: #4caf50;
+}
+
+/* Button styles */
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .btn {
@@ -60,6 +72,7 @@ body {
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
+  margin-right: 10px;
 }
 
 .receipt-btn:hover {
@@ -74,15 +87,24 @@ body {
   background-color: #ff3333;
 }
 
-/* Receipt Header */
+/* Receipt styles */
+.receipt-container {
+  background-color: #fff;
+  padding: 1.25rem;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+  page-break-inside: avoid;
+}
+
 .header {
   display: flex;
   align-items: center;
-  margin-block-end: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .header img {
-  max-width: 30px;
+  width: 40px;
   height: auto;
 }
 
@@ -90,73 +112,74 @@ body {
   color: #0000ff;
   font-size: 1.2rem;
   font-weight: bold;
-  margin-inline-start: 10px;
+  margin-inline-start: 0.625rem;
 }
 
 .billing-info {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 1rem;
-  margin-block-end: 1.5rem;
+  margin-block-end: 1.25rem;
 }
 
 .receipt-title {
   text-align: center;
   font-size: 1.5rem;
-  margin: 1rem 0;
-}
-
-.receipt-date {
-  font-size: .6rem;
-  text-align: right;
-  margin-block-end: 1rem;
+  margin: 1.25rem 0;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-block-end: 1.2rem;
+  margin-block-end: 1.25rem;
 }
 
 th,
 td {
-  padding: 10px;
+  padding: 0.5rem;
   text-align: left;
   border: 1px solid #ddd;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #f8f9fa;
 }
 
 .total {
   text-align: right;
   font-weight: bold;
-  font-size: 1rem;
-  margin-top: 20px;
+  font-size: 1.2rem;
+  margin-block-start: 1.25rem;
 }
 
 .contact {
-  margin-block-start: 2rem;
+  margin-block-start: 2.5rem;
 }
 
 .contact-title {
   color: #ff0000;
   font-weight: bold;
-  font-size: 1rem;
-}
-
-.contact p {
-  font-size: .8rem;
+  margin-block-end: 0.625rem;
 }
 
 .thank-you {
   text-align: center;
   color: #0000ff;
-  font-size: .5rem;
-  margin-top: 40px;
+  margin-top: 2.5rem;
+  font-size: 1rem;
 }
 
+.footer {
+  text-align: center;
+  margin-top: 1.25rem;
+}
+
+.footer span, .footer a {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+/* Responsive styles */
 @media screen and (min-width: 768px) {
   body {
     padding: 3rem;
@@ -164,37 +187,47 @@ th {
 
   .form-container,
   .receipt-container {
-    padding: 30px;
+    padding: 2rem;
   }
 
   .form-group {
-  grid-template-columns: 1fr 1fr 150px;
+    grid-template-columns: 1fr 1fr 150px;
   }
 
-  .items-group {
+   .items-group {
     grid-template-columns: 50px 1fr 150px auto;
   }
 
   .header img {
-    max-width: 80px;
+    width: 80px;
   }
 
-  .company-name {
+  .company-name, 
+  .receipt-title {
     font-size: 1.5rem;
   }
 
-  .receipt-title {
-    font-size: 2rem;
-  }
-
-  .receipt-date, .total,  .contact-title  {
+  .receipt-date,
+  .total,
+  .contact-title {
     font-size: 1.2rem;
   }
-
-  .contact p {
-font-size: 1rem;  }
-
-.thank-you {
-  font-size: .8rem;
 }
+
+/* PDF-specific styles */
+@media print {
+  body {
+    padding: 0;
+    background: white;
+  }
+
+  .receipt-container {
+    box-shadow: none;
+    max-width: 80%;
+    padding: 15px;
+  }
+
+  .form-container {
+    display: none;
+  }
 }

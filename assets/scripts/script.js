@@ -1,4 +1,3 @@
-// Set current date as default
 document.getElementById("date").valueAsDate = new Date();
 
 function addItem() {
@@ -16,6 +15,13 @@ function addItem() {
             `;
 
   itemsContainer.appendChild(itemsGroup);
+}
+
+function updateItemNumbers() {
+  const items = document.getElementsByClassName("items-group");
+  for (let i = 0; i < items.length; i++) {
+    items[i].querySelector("input[readonly]").value = i + 1;
+  }
 }
 
 function formatPrice(price) {
@@ -63,24 +69,44 @@ function generateReceipt() {
 
 async function downloadPDF() {
   const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-
   const element = document.getElementById("receipt");
-  const canvas = await html2canvas(element, {
-    scale: 2,
-    useCORS: true,
-    logging: true,
-  });
 
-  const imgData = canvas.toDataURL("image/png");
-  const imgProps = doc.getImageProperties(imgData);
-  const pdfWidth = doc.internal.pageSize.getWidth();
-  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  const clone = element.cloneNode(true);
+  clone.style.margin = "0";
+  clone.style.padding = "15px";
+  document.body.appendChild(clone);
 
-  doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-  doc.save("receipt.pdf");
+  try {
+    const canvas = await html2canvas(clone, {
+      useCORS: true,
+      logging: false,
+      imageTimeout: 0,
+      removeContainer: true,
+      backgroundColor: "#ffffff",
+    });
+
+    const ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "low";
+
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+      compress: true,
+    });
+
+    const imgData = canvas.toDataURL("image/jpeg", 0.7);
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight, "", "FAST");
+    pdf.save(`${document.getElementById("billingTo").value}.pdf`);
+  } finally {
+    document.body.removeChild(clone);
+  }
 }
 
-// Initialize
 addItem();
 generateReceipt();
